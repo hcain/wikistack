@@ -1,12 +1,12 @@
 var express = require('express');
+var app = express();
 var morgan = require('morgan');
 var nunjucks = require('nunjucks');
 var bodyParser = require('body-parser');
 var models = require('./models');
 var router = require('./routes');
+var wikiRouter = require('./routes/wiki');
 
-var app = express(),
-    PORT = 3000;
 
 nunjucks.configure('views', { noCache: true });
 app.set('view engine', 'html');
@@ -20,6 +20,7 @@ app.use(morgan('dev'));
 app.use(express.static('public'));
 
 app.use('/', router);
+app.use('/wiki/', wikiRouter);
 
 models.User.sync({})
 .then(function () {

@@ -22,8 +22,18 @@ var Page = db.define('page', {
         type: Sequelize.ENUM('open', 'closed')
     },
 },
-{getterMethods: 
-    {route: function() { return  '/wiki/' + this.urlTitle }}
+{getterMethods:
+    {route: function() { return  '/wiki/' + this.urlTitle }},
+    hooks: {
+        beforeValidate: function(page){
+                if (page.title) {
+                    page.urlTitle = page.title.replace(/\s+/g, '_').replace(/\W/g, '');
+                } else {
+                    // Generates random 5 letter string
+                    page.urlTitle = Math.random().toString(36).substring(2, 7);
+                }
+        }
+    }
 }
 );
 
