@@ -4,19 +4,16 @@ var db = new Sequelize('postgres://localhost:5432/wikistack');
 var Page = db.define('page', {
     title: {
         type: Sequelize.STRING,
-        allowNull: false,
-        notEmpty: true,
+        allowNull: false
     },
     urlTitle: {
         type: Sequelize.STRING,
-        isUrl: true,
-        allowNull: false,
-        notEmpty: true
+        allowNull: false
     },
     content: {
         type: Sequelize.TEXT,
         allowNull: false,
-        notEmpty: true,
+        notEmpty: true
     },
     status: {
         type: Sequelize.ENUM('open', 'closed')
@@ -46,10 +43,11 @@ var User = db.define('user', {
     email: {
         type: Sequelize.STRING,
         isEmail: true,
-        allowNull: false,
-        notEmpty: true
+        allowNull: false
     }
 });
+
+Page.belongsTo(User, { as: 'author' });
 
 
 module.exports = {

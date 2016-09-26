@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var models = require('./models');
 var router = require('./routes');
 var wikiRouter = require('./routes/wiki');
+var usersRouter = require('./routes/users');
 
 
 nunjucks.configure('views', { noCache: true });
@@ -21,10 +22,11 @@ app.use(express.static('public'));
 
 app.use('/', router);
 app.use('/wiki/', wikiRouter);
+app.use('/users/', usersRouter);
 
 models.User.sync({})
 .then(function () {
-    return models.Page.sync({})
+    return models.Page.sync({force: false});
 })
 .then(function () {
     app.listen(3001, function () {
