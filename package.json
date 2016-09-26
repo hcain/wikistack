@@ -3,17 +3,24 @@
   "version": "1.0.0",
   "description": "a wiki stack",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon -e html,js,css app.js"
+
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kaizerroll/wikistack.git"
+    "url": "git+https://github.com/hcain/wikistack.git"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "morgan": "^1.7.0",
     "nunjucks": "^2.5.2",
+    "pg": "^6.1.0",
+    "pg-hstore": "^2.3.2",
     "sequelize": "^3.24.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2"
   }
 }
